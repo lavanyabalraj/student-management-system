@@ -6,7 +6,6 @@
 // =====================================================
 
 const mysql = require("mysql2/promise");
-const fs = require("fs");
 require("dotenv").config();
 
 const pool = mysql.createPool({
@@ -21,7 +20,6 @@ const pool = mysql.createPool({
   queueLimit: 0,
 
   ssl: {
-    ca: fs.readFileSync("./ca.pem"),
     rejectUnauthorized: false
   }
 });
@@ -29,11 +27,9 @@ const pool = mysql.createPool({
 (async () => {
   try {
     const conn = await pool.getConnection();
-    console.log("✅ TiDB Connected Successfully");
+    console.log("✅ DB Connected Successfully");
     conn.release();
   } catch (err) {
-    console.error("❌ DB Connection Failed:", err.message);
+    console.error("❌ DB Error:", err.message);
   }
 })();
-
-module.exports = pool;
