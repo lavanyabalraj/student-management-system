@@ -4,8 +4,10 @@
 // from the .env file. Exported pool is reused across
 // the whole app (models use pool.execute / pool.query).
 // =====================================================
+
 const mysql = require("mysql2/promise");
-require("dotenv").config");
+const fs = require("fs");
+require("dotenv").config();
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -19,7 +21,7 @@ const pool = mysql.createPool({
   queueLimit: 0,
 
   ssl: {
-    ca: require("fs").readFileSync("./ca.pem")  // ✅ IMPORTANT FIX
+    ca: fs.readFileSync("./ca.pem")
   }
 });
 
