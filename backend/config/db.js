@@ -5,7 +5,6 @@
 // the whole app (models use pool.execute / pool.query).
 // =====================================================
 
-
 const mysql = require("mysql2/promise");
 const fs = require("fs");
 require("dotenv").config();
@@ -23,7 +22,7 @@ const pool = mysql.createPool({
 
   ssl: {
     ca: fs.readFileSync("./ca.pem"),
-    rejectUnauthorized: true
+    rejectUnauthorized: false
   }
 });
 
