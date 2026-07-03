@@ -4,9 +4,8 @@
 // from the .env file. Exported pool is reused across
 // the whole app (models use pool.execute / pool.query).
 // =====================================================
-
 const mysql = require("mysql2/promise");
-require("dotenv").config();
+require("dotenv").config");
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -20,7 +19,7 @@ const pool = mysql.createPool({
   queueLimit: 0,
 
   ssl: {
-    rejectUnauthorized: false
+    ca: require("fs").readFileSync("./ca.pem")  // ✅ IMPORTANT FIX
   }
 });
 
@@ -33,3 +32,5 @@ const pool = mysql.createPool({
     console.error("❌ DB Error:", err.message);
   }
 })();
+
+module.exports = pool;
