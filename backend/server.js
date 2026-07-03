@@ -17,7 +17,10 @@ const studentRoutes = require('./routes/studentRoutes');
 const app = express();
 
 // ---- Global middleware ----
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  credentials: true
+}));
 app.use(express.json()); // parse JSON request bodies
 
 // ---- Health check ----
